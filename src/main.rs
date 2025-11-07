@@ -1,16 +1,23 @@
-use sysinfo::{Component, Disks, Networks, System};
+mod monitor;
+
+use std::time::Duration;
+use std::thread;
+
+use crate::monitor::Monitor;
 
 fn main() {
-    let mut sys = System::new_all();
+    let mut monitor = Monitor::new();
 
     loop {
-        sys.refresh_all();
-        print!("\x1B[2J\x1B[1;1H");
-        println!("=SYSMON=");
+        monitor.refresh();
 
-        println!("===CPU USAGE===");
-        for cpu in sys.cpus() {
-            println!("{}: {:.2}%", cpu.name(), cpu.cpu_usage());
+        print!("\x1B[2J\x1B[1;1H");
+
+        println!("\n=== CPU Usages ===");
+        for (i, usage) in monitor.cpu_usage().iter().enumerate() {
+            println!("Core {}: {:.2}%", i, usage);
         }
+
+        thread::sleep(Duration::from_secs(1));
     }
 }
