@@ -68,4 +68,19 @@ impl Monitor {
     pub fn uptime_days(&self) -> f32 {
         System::uptime() as f32 / 3600.0 / 24.0
     }
+
+    pub fn system_info(&self) -> String {
+        let kernel = System::kernel_version().unwrap_or_else(|| "<unknown>".to_owned());
+        let os_version = System::long_os_version().unwrap_or_else(|| "<unknown>".to_owned());
+        let distro = System::distribution_id();
+        let arch = std::env::consts::ARCH;
+
+        format!(
+            "{} kernel {} • {} • {}",
+            distro,
+            kernel,
+            arch,
+            os_version
+        )
+    }
 }

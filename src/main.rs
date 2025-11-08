@@ -13,7 +13,10 @@ fn main() {
 
         print!("\x1B[2J\x1B[1;1H");
 
-        println!("Uptime: {:.2} Days", monitor.uptime_days());
+        // println!("Linux kernel 5.15.0-86-generic • x86_64 • Ubuntu 22.04.3 LTS");
+        println!("{}", monitor.system_info());
+
+        println!("\nUptime: {:.2} Days", monitor.uptime_days());
 
         println!("\n=== CPU Usages ===");
         for (i, usage) in monitor.cpu_usage().iter().enumerate() {
