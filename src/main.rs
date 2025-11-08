@@ -13,6 +13,8 @@ fn main() {
 
         print!("\x1B[2J\x1B[1;1H");
 
+        println!("Uptime: {:.2} Days", monitor.uptime_days());
+
         println!("\n=== CPU Usages ===");
         for (i, usage) in monitor.cpu_usage().iter().enumerate() {
             println!("Core {}: {:.2}%", i+1, usage);

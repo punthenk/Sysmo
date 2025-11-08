@@ -64,4 +64,8 @@ impl Monitor {
     pub fn refresh(&mut self) {
         self.sys.refresh_all();
     }
+
+    pub fn uptime_days(&self) -> f32 {
+        System::uptime() as f32 / 3600.0 / 24.0
+    }
 }
